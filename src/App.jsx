@@ -124,13 +124,12 @@ function Navigation() {
 
 function Hero() {
   return (
-    <section className="hero" id="top">
-      <div className="container hero-grid">
-        <div className="hero-copy">
+    <section className="hero hero-ai" id="top">
+      <div className="container ai-hero-stage">
+        <div className="ai-copy">
           <div className="availability reveal" data-reveal><span className="pulse-dot"/>Currently exploring internship opportunities</div>
-          <p className="hello reveal delay-1" data-reveal>Hi, I’m Ahmed.</p>
           <h1 className="reveal delay-1" data-reveal>From <span className="outline">concept</span><br/>to code to <span className="accent">system.</span></h1>
-          <p className="hero-lede reveal delay-2" data-reveal>I’m a Computer Science student who likes turning innovative ideas into things that actually work. I build with Python, automation, APIs, and AI — then test, refine, and keep pushing until the result feels real.</p>
+          <div className="lede-ghost reveal delay-2" data-reveal>Ideas become useful when they survive the build.</div>
           <figure className="hero-quote reveal delay-2" data-reveal>
             <blockquote>“Genius is 1% inspiration and 99% perspiration.”</blockquote>
             <figcaption>— Thomas Edison</figcaption>
@@ -140,15 +139,42 @@ function Hero() {
             <a className="button" href="#story">My approach</a>
             <a className="button text-button" href={LINKS.cv} download>Download CV <Icon name="external" size={15}/></a>
           </div>
-          <div className="scroll-hint reveal delay-3" data-reveal><i/>Scroll to explore the build</div>
+          <div className="scroll-hint reveal delay-3" data-reveal><i/>Scroll to meet the builder behind the work</div>
         </div>
 
-        <div className="portrait-stage reveal delay-2" data-reveal>
-          <div className="orbit orbit-one"/><div className="orbit orbit-two"/>
-          <figure className="portrait-frame"><img src="/assets/ahmed-portrait.jpeg" alt="Ahmed Nadeem" fetchPriority="high"/></figure>
-          <div className="portrait-tag tag-one"><small>WORK MODE</small><strong>Build → Test → Improve</strong></div>
-          <div className="portrait-tag tag-two"><small>CURRENT FOCUS</small><strong>Python · AI · Automation</strong></div>
-          <div className="signature">Ahmed</div>
+        <div className="ai-core-zone reveal delay-2" data-reveal aria-label="Mechanical AI system illustration">
+          <div className="ai-core">
+            <div className="ai-orbit"><span className="ai-orbit-dot"/></div>
+            <div className="ai-orbit o2"><span className="ai-orbit-dot"/></div>
+            <div className="ai-fin f1"/><div className="ai-fin f2"/><div className="ai-fin f3"/>
+            <div className="ai-mecha"><div className="ai-eye"/></div>
+            <div className="ai-signal"><i/><i/><i/></div>
+            <div className="ai-core-label">Concept → code → system</div>
+          </div>
+          <div className="ai-camo-word">SYSTEM</div>
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function PersonalIntro() {
+  return (
+    <section className="personal-intro" aria-label="About Ahmed">
+      <div className="container personal-grid">
+        <div className="personal-photo-stage reveal" data-reveal>
+          <div className="ring"/><div className="ring r2"/>
+          <figure className="personal-photo"><img src="/assets/ahmed-portrait.jpeg" alt="Ahmed Nadeem" loading="lazy"/></figure>
+        </div>
+        <div className="personal-copy">
+          <div className="kicker reveal" data-reveal><span className="pulse-dot"/>ABOUT AHMED</div>
+          <h2 className="hello-big reveal delay-1" data-reveal>Hi, I’m <span>Ahmed.</span></h2>
+          <p className="intro-lede reveal delay-2" data-reveal>I’m a Computer Science student who likes turning innovative ideas into things that actually work. I build with Python, automation, APIs, and AI — then test, refine, and keep pushing until the result feels real.</p>
+          <div className="intro-mini reveal delay-3" data-reveal>
+            <div><small>BUILD</small><b>Practical first versions</b></div>
+            <div><small>TEST</small><b>Find what actually breaks</b></div>
+            <div><small>IMPROVE</small><b>Make the next version smarter</b></div>
+          </div>
         </div>
       </div>
     </section>
@@ -294,5 +320,5 @@ export default function App() {
     return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update) }
   }, [])
 
-  return <><Cursor/><div className="scroll-progress" style={{width:`${progress}%`}}/><div className="noise" aria-hidden="true"/><Navigation/><main><Hero/><Story/><Projects/><Focus/><Notes/><Contact/></main></>
+  return <><Cursor/><div className="scroll-progress" style={{width:`${progress}%`}}/><div className="noise" aria-hidden="true"/><Navigation/><main><Hero/><PersonalIntro/><Story/><Projects/><Focus/><Notes/><Contact/></main></>
 }
