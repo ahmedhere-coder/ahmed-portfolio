@@ -1,16 +1,46 @@
-# React + Vite
+# Ahmed Nadeem — Production Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+React + Vite production implementation of the approved portfolio design.
 
-Currently, two official plugins are available:
+## Run locally
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+```bash
+npm install
+npm run dev
+```
 
-## React Compiler
+## Production build
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm run build
+```
 
-## Expanding the ESLint configuration
+## Deployment
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+This project is ready for Vercel. Import/push it to the existing `ahmed-portfolio` GitHub repository and Vercel can rebuild the existing site automatically.
+
+## Real links already wired
+
+- Personal LinkedIn
+- Personal GitHub
+- Email
+- Calendly booking
+- Downloadable CV
+- TradeMind GitHub + LinkedIn build story
+- Global Stock Portfolio Tracker GitHub + LinkedIn build story
+- PyBot GitHub + LinkedIn build story
+- MindStack live website + company LinkedIn
+
+## Responsive design
+
+Desktop keeps the approved V7 composition. Mobile/tablet intentionally use a separate responsive layout with:
+
+- compact touch-friendly mobile navigation
+- no robotic cursor on touch devices
+- stacked project cards with no overlap
+- responsive TradeMind media containment
+- proportional MindStack logo scaling
+- vertical note layout
+- touch-friendly buttons
+- reduced-motion support
+- no fixed widths that should create horizontal overflow
