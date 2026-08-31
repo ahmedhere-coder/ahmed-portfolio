@@ -291,6 +291,144 @@ function Notes() {
   )
 }
 
+
+const FORM_ENDPOINT = 'https://formspree.io/f/mnpqpnzv'
+
+function ConversationForm() {
+  const topics = [
+    'Internship opportunity',
+    'Collaboration',
+    'AI / Automation',
+    'Project or build idea',
+    'Feedback',
+    'Something else'
+  ]
+
+  const [topic, setTopic] = useState('')
+  const [submitState, setSubmitState] = useState({ status: 'idle', message: '' })
+
+  async function handleSubmit(event) {
+    event.preventDefault()
+
+    if (!topic) {
+      setSubmitState({ status: 'error', message: 'Choose what you are reaching out about first.' })
+      return
+    }
+
+    const form = event.currentTarget
+    const formData = new FormData(form)
+    formData.set('topic', topic)
+    formData.set('_subject', `New portfolio conversation — ${topic}`)
+
+    setSubmitState({ status: 'sending', message: 'Sending your message…' })
+
+    try {
+      const response = await fetch(FORM_ENDPOINT, {
+        method: 'POST',
+        body: formData,
+        headers: { Accept: 'application/json' }
+      })
+
+      if (!response.ok) throw new Error('Submission failed')
+
+      form.reset()
+      setTopic('')
+      setSubmitState({
+        status: 'success',
+        message: 'Message received. I’ll get back to you soon. ✓'
+      })
+    } catch {
+      setSubmitState({
+        status: 'error',
+        message: 'Something went wrong. Please try again or use the email option below.'
+      })
+    }
+  }
+
+  return (
+    <section className="conversation" aria-labelledby="conversation-title">
+      <div className="container">
+        <div className="conversation-shell reveal" data-reveal>
+          <div className="conversation-heading">
+            <div className="kicker"><span className="pulse-dot"/>START A CONVERSATION</div>
+            <h2 id="conversation-title">What brings you here?</h2>
+            <p>Whether it’s an internship opportunity, a project idea, a collaboration, or something around AI and automation — share the context and it will land directly in my inbox.</p>
+          </div>
+
+          <form className="conversation-form" action={FORM_ENDPOINT} method="POST" onSubmit={handleSubmit}>
+            <fieldset className="topic-fieldset">
+              <legend>What are you reaching out about?</legend>
+              <div className="topic-grid">
+                {topics.map(item => (
+                  <button
+                    className={`topic-option ${topic === item ? 'selected' : ''}`}
+                    type="button"
+                    key={item}
+                    aria-pressed={topic === item}
+                    onClick={() => {
+                      setTopic(item)
+                      if (submitState.status === 'error') setSubmitState({ status: 'idle', message: '' })
+                    }}
+                  >
+                    <span>{item}</span>
+                    <i aria-hidden="true"/>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
+            <input type="hidden" name="topic" value={topic} readOnly/>
+
+            <label className="form-field form-message">
+              <span>Tell me a little more</span>
+              <textarea
+                name="message"
+                rows="6"
+                required
+                placeholder="What are you working on, what are you exploring, or what would you like to discuss?"
+              />
+            </label>
+
+            <div className="form-row">
+              <label className="form-field">
+                <span>Name</span>
+                <input name="name" type="text" autoComplete="name" required placeholder="Your name"/>
+              </label>
+              <label className="form-field">
+                <span>Email</span>
+                <input name="email" type="email" autoComplete="email" required placeholder="you@email.com"/>
+              </label>
+            </div>
+
+            <label className="form-field">
+              <span>Company / Organization <small>(optional)</small></span>
+              <input name="company" type="text" autoComplete="organization" placeholder="Company or organization"/>
+            </label>
+
+            <input className="form-trap" type="text" name="_gotcha" tabIndex="-1" autoComplete="off" aria-hidden="true"/>
+
+            <div className="form-submit-row">
+              <button className="conversation-submit" type="submit" disabled={submitState.status === 'sending'}>
+                {submitState.status === 'sending' ? 'Sending…' : <>Start the conversation <Icon name="arrow" size={16}/></>}
+              </button>
+
+              <p className="email-fallback">Prefer email? <a href={LINKS.email}>ahmedhere734@gmail.com</a></p>
+            </div>
+
+            <div
+              className={`form-status ${submitState.status === 'success' ? 'success' : ''} ${submitState.status === 'error' ? 'error' : ''}`}
+              role={submitState.status === 'error' ? 'alert' : 'status'}
+              aria-live="polite"
+            >
+              {submitState.message}
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  )
+}
+
 function Contact() {
   return (
     <section className="contact" id="contact">
@@ -320,5 +458,5 @@ export default function App() {
     return () => { window.removeEventListener('scroll', update); window.removeEventListener('resize', update) }
   }, [])
 
-  return <><Cursor/><div className="scroll-progress" style={{width:`${progress}%`}}/><div className="noise" aria-hidden="true"/><Navigation/><main><Hero/><PersonalIntro/><Story/><Projects/><Focus/><Notes/><Contact/></main></>
+  return <><Cursor/><div className="scroll-progress" style={{width:`${progress}%`}}/><div className="noise" aria-hidden="true"/><Navigation/><main><Hero/><PersonalIntro/><Story/><Projects/><Focus/><Notes/><ConversationForm/><Contact/></main></>
 }

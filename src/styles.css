@@ -152,3 +152,293 @@ radial-gradient(600px 560px at 78% 38%,rgba(114,222,251,.055),transparent 70%),#
   .hero.hero-ai .ai-copy h1{font-size:47px}
   .hero.hero-ai .ai-core-zone{right:-245px;opacity:.34}
 }
+
+
+/* Week 6 — one live dynamic feature: portfolio conversation form */
+.conversation {
+  padding: 132px 0 128px;
+  background:
+    radial-gradient(620px 420px at 12% 28%, rgba(183,255,90,.055), transparent 72%),
+    radial-gradient(620px 420px at 86% 76%, rgba(114,222,251,.055), transparent 72%),
+    #090c0e;
+  border-top: 1px solid rgba(255,255,255,.06);
+  position: relative;
+  overflow: hidden;
+}
+.conversation-shell {
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 30px;
+  background: linear-gradient(145deg, rgba(15,20,23,.94), rgba(9,13,15,.96));
+  box-shadow: 0 30px 90px rgba(0,0,0,.30);
+  padding: 46px;
+  position: relative;
+  overflow: hidden;
+}
+.conversation-shell::before {
+  content: "";
+  position: absolute;
+  width: 420px;
+  height: 420px;
+  right: -180px;
+  top: -190px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(183,255,90,.08), transparent 70%);
+  pointer-events: none;
+}
+.conversation-heading {
+  display: grid;
+  grid-template-columns: 1fr .78fr;
+  gap: 70px;
+  align-items: end;
+  margin-bottom: 42px;
+  position: relative;
+  z-index: 1;
+}
+.conversation-heading h2 {
+  grid-column: 1;
+  font-size: clamp(44px,5vw,68px);
+  line-height: .98;
+  letter-spacing: -.05em;
+  margin: 12px 0 0;
+}
+.conversation-heading > p {
+  grid-column: 2;
+  grid-row: 1 / span 2;
+  margin: 0;
+  color: #98a39e;
+  line-height: 1.72;
+  align-self: end;
+}
+.conversation-form {
+  position: relative;
+  z-index: 1;
+}
+.topic-fieldset {
+  margin: 0 0 32px;
+  padding: 0;
+  border: 0;
+}
+.topic-fieldset legend,
+.form-field > span {
+  display: block;
+  color: #dbe1de;
+  font-size: 13px;
+  font-weight: 700;
+  margin-bottom: 11px;
+}
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+.topic-option {
+  min-height: 66px;
+  padding: 16px 18px;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  background: rgba(255,255,255,.022);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 14px;
+  color: #aeb8b3;
+  text-align: left;
+  font-size: 12px;
+  font-weight: 700;
+  transition: .28s var(--ease);
+}
+.topic-option i {
+  flex: 0 0 auto;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,.24);
+  transition: .28s var(--ease);
+}
+.topic-option:hover {
+  transform: translateY(-2px);
+  border-color: rgba(183,255,90,.24);
+  color: #eef3ef;
+  background: rgba(183,255,90,.035);
+}
+.topic-option.selected {
+  border-color: rgba(183,255,90,.45);
+  color: #efffe4;
+  background: linear-gradient(135deg, rgba(183,255,90,.105), rgba(114,222,251,.045));
+  box-shadow: inset 0 0 0 1px rgba(183,255,90,.04), 0 12px 32px rgba(0,0,0,.16);
+}
+.topic-option.selected i {
+  border-color: var(--acid);
+  background: var(--acid);
+  box-shadow: 0 0 13px rgba(183,255,90,.65);
+}
+.form-field {
+  display: block;
+}
+.form-field small {
+  color: #6f7a74;
+  font-weight: 600;
+  margin-left: 4px;
+}
+.form-field input,
+.form-field textarea {
+  width: 100%;
+  border: 1px solid rgba(255,255,255,.10);
+  border-radius: 16px;
+  background: rgba(4,7,9,.42);
+  color: #eef3ef;
+  font: 500 13px/1.6 Manrope,system-ui,sans-serif;
+  outline: none;
+  padding: 16px 17px;
+  transition: border-color .25s, box-shadow .25s, background .25s;
+}
+.form-field input {
+  min-height: 55px;
+}
+.form-field textarea {
+  min-height: 175px;
+  resize: vertical;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: #59645f;
+}
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: rgba(183,255,90,.44);
+  background: rgba(7,11,11,.60);
+  box-shadow: 0 0 0 3px rgba(183,255,90,.055);
+}
+.form-message {
+  margin-bottom: 20px;
+}
+.form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  margin-bottom: 20px;
+}
+.form-trap {
+  position: absolute !important;
+  left: -10000px !important;
+  width: 1px !important;
+  height: 1px !important;
+  overflow: hidden !important;
+}
+.form-submit-row {
+  margin-top: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.conversation-submit {
+  min-height: 50px;
+  padding: 13px 19px;
+  border: 0;
+  border-radius: 999px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  background: var(--acid);
+  color: #071006;
+  font-size: 13px;
+  font-weight: 800;
+  transition: .28s var(--ease);
+}
+.conversation-submit:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(183,255,90,.12);
+}
+.conversation-submit:disabled {
+  opacity: .62;
+}
+.email-fallback {
+  margin: 0;
+  color: #727e78;
+  font-size: 11px;
+}
+.email-fallback a {
+  color: #b7c4bd;
+  font-weight: 700;
+  transition: color .2s;
+}
+.email-fallback a:hover {
+  color: var(--acid);
+}
+.form-status {
+  min-height: 24px;
+  margin-top: 16px;
+  color: #89958f;
+  font-size: 12px;
+  line-height: 1.5;
+}
+.form-status.success {
+  color: #c8f6ad;
+}
+.form-status.error {
+  color: #ffc4bd;
+}
+
+@media (max-width: 900px) {
+  .conversation {
+    padding: 105px 0;
+  }
+  .conversation-shell {
+    padding: 34px;
+  }
+  .conversation-heading {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+  .conversation-heading h2,
+  .conversation-heading > p {
+    grid-column: 1;
+    grid-row: auto;
+  }
+  .conversation-heading > p {
+    max-width: 690px;
+  }
+  .topic-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 620px) {
+  .conversation {
+    padding: 92px 0;
+  }
+  .conversation-shell {
+    padding: 25px 18px;
+    border-radius: 24px;
+  }
+  .conversation-heading {
+    margin-bottom: 30px;
+  }
+  .conversation-heading h2 {
+    font-size: 42px;
+  }
+  .topic-grid,
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+  .topic-option {
+    min-height: 58px;
+  }
+  .form-field textarea {
+    min-height: 160px;
+  }
+  .form-submit-row {
+    align-items: stretch;
+    flex-direction: column;
+    gap: 14px;
+  }
+  .conversation-submit {
+    width: 100%;
+    min-height: 52px;
+  }
+  .email-fallback {
+    text-align: center;
+  }
+}
